@@ -5,23 +5,27 @@
   "license": "MIT",
   "type": "module",
   "module": "dist/index.js",
-  "types": "types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
   "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./dist/index.js"
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build && npm run lint && npm run test",
-    "prepare": "husky && ts-patch install -s",
-    "clean": "rm -rf dist/ types/",
-    "build": "tsc",
-    "dev": "tsc -w",
+    "prepare": "husky",
+    "clean": "rm -rf dist/",
+    "build": "pkgroll",
+    "dev": "pkgroll --watch",
     "lint": "npx eslint",
     "test": "tsc -p tests && vitest run --config tests/vitest.config.mts",
     "fix": "npx eslint --fix"
@@ -39,11 +43,10 @@
     "globals": "^16.0.0",
     "husky": "~9.1.7",
     "lint-staged": "~15.4.3",
+    "pkgroll": "^2.21.5",
     "prettier": "~3.5.2",
-    "ts-patch": "~3.3.0",
     "typescript": "~5.7.3",
     "typescript-eslint": "^8.25.0",
-    "typescript-transform-paths": "~3.5.3",
-    "vitest": "^3.0.7"
+    "vitest": "^3.2.4"
   }
 }
