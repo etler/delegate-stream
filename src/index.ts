@@ -1,9 +1,9 @@
 import { asyncIterableSequencer, Chain } from "async-iterable-sequencer";
 
 export interface DelegateStreamOptions<I, O> {
-  start?: (chain: Chain<O>) => void;
-  transform: (chunk: I, chain: Chain<O>) => void;
-  finish?: (chain: Chain<O>) => void;
+  start?: (chain: Chain<O>) => unknown;
+  transform: (chunk: I, chain: Chain<O>) => unknown;
+  finish?: (chain: Chain<O>) => unknown;
 }
 
 export class DelegateStream<I, O> {
