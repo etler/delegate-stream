@@ -15,4 +15,5 @@
 /ignore
 .DS_Store
 .claude
+.npmrc
 npm-debug.log*
