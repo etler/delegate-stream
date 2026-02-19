@@ -1,6 +1,6 @@
 {
   "name": "delegate-stream",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "github:etler/delegate-stream",
   "license": "MIT",
   "type": "module",
