@@ -1,9 +1,9 @@
 import { asyncIterableSequencer, Chain } from "async-iterable-sequencer";
 
 export interface DelegateStreamOptions<I, O> {
-  start?: (chain: Chain<O>) => unknown;
-  transform?: (chunk: I, chain: Chain<O>) => unknown;
-  finish?: (chain: Chain<O>) => unknown;
+  start?: (chain: Chain<O>) => void;
+  transform?: (chunk: I, chain: Chain<O>) => void | PromiseLike<void>;
+  finish?: (chain: Chain<O>) => void | PromiseLike<void>;
 }
 
 export class DelegateStream<I, O> {
@@ -15,10 +15,10 @@ export class DelegateStream<I, O> {
     this.readable = ReadableStream.from<O>(sequence);
     this.writable = new WritableStream<I>({
       write: (chunk) => {
-        transform?.(chunk, chain);
+        return transform?.(chunk, chain);
       },
       close: () => {
-        finish?.(chain);
+        return finish?.(chain);
       },
     });
     start?.(chain);
